@@ -20,7 +20,7 @@
       "selenium_host"  : "localhost",
       "silent": true,
       "firefox_profile": false,
-      "chrome_driver": "",
+      "chrome_driver": "/usr/bin/google-chrome",
       "ie_driver": "",
       "screenshots" : {
         "enabled" : false,
