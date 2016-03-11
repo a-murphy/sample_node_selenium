@@ -6,17 +6,32 @@ node_js:
 services:
   - selenium
 
+env:
+  global:
+    - DISPLAY=:99.0
+
 build_image: shippable/minv2:latest
 
-before_install:
+#install:
+#  - pip install -r demo/requirements.txt
+
+before_script: 
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
   - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip"
   - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
   - "chmod +x /home/shippable/bin/chromedriver"
   - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
   - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/bin/google-chrome"
   - "sudo chmod +x /usr/bin/google-chrome"
+  #- mysql -e 'create database test;'
+  - /etc/init.d/xvfb start
 
 script:
+#  - python demo/manage.py test fts --pattern="*" -v 2
   - sudo npm install
-  - export DISPLAY=:99.0
-  - xvfb-run --server-args="-ac" npm test
+  - npm test
+
+after_script:
+  #- coverage here...
+  - /etc/init.d/xvfb stop
