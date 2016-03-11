@@ -20,8 +20,10 @@
       "selenium_host"  : "localhost",
       "silent": true,
       "firefox_profile": false,
-      "chrome_driver": "/usr/bin/google-chrome",
       "ie_driver": "",
+      "cli_args" : {
+        "webdriver.chrome.driver" : "/path/to/chromedriver"
+      },
       "screenshots" : {
         "enabled" : false,
         "path" : ""
@@ -29,7 +31,8 @@
       "desiredCapabilities": {
         "browserName": "chrome",
         "javascriptEnabled": true,
-        "acceptSslCerts": true
+        "acceptSslCerts": true,
+        "args" : ["--no-sandbox"]
       }
     }
   }
