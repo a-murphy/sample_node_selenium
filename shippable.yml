@@ -26,13 +26,14 @@ before_script:
   - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/bin/google-chrome"
   - "sudo chmod +x /usr/bin/google-chrome"
   #- mysql -e 'create database test;'
-  - /etc/init.d/xvfb start
+  #- /etc/init.d/xvfb start
 
 script:
 #  - python demo/manage.py test fts --pattern="*" -v 2
   - sudo npm install
-  - npm test
-  #- xvfb-run --server-args="-ac" npm test
+  - export DISPLAY=:99.0
+  # npm test
+  - xvfb-run --server-args="-ac" npm test
 
 after_script:
   #- coverage here...
