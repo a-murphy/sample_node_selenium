@@ -9,8 +9,6 @@ addons:
 services:
   - selenium
 
-build_image: shippable/minv2:latest
-
 script:
   - sudo npm install
   - export DISPLAY=:99.0
