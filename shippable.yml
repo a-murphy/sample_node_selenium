@@ -2,16 +2,42 @@ language: node_js
 
 node_js:
   - "0.10"
-  
-build_image: drydock/u14nodall:prod
 
 addons:
-  firefox: "17.0"
+  selenium: "2.53"
 
-services:
-  - selenium
+env:
+  - firefox="45.0"
+  - firefox="44.0"
+
+before_install:
+  # Firefox
+  - "sudo wget \"https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$firefox/linux-x86_64/en-US/firefox-$firefox.tar.bz2\""
+  - sudo tar -xjvf firefox-$firefox.tar.bz2
+  - sudo ln -sf /tmp/firefox/firefox /usr/bin/firefox
+  - ff_version=`firefox --version 2>&1`;
+  - echo "Using firefox version $ff_version"
+ 
+  # Selenium
+  - export SHIPPABLE_SELENIUM_BINARY="/usr/local/selenium/selenium-server-standalone-2.52.0.jar";
+  - export SHIPPABLE_SELENIUM_PORT=4444
+  - export SHIPPABLE_SELENIUM_CMD="java -Djava.security.egd=file:///dev/urandom -jar $SHIPPABLE_SELENIUM_BINARY -log selenium.log -port $SHIPPABLE_SELENIUM_PORT > /dev/null 2>&1 &";
+  - export SHIPPABLE_SELENIUM_LOG="selenium.log"
+  - export DISPLAY=":99.0"
+  - start_generic_service "selenium" "$SHIPPABLE_SELENIUM_BINARY" "$SHIPPABLE_SELENIUM_CMD" "$SHIPPABLE_SELENIUM_PORT" "$SHIPPABLE_SELENIUM_LOG";
+
+  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip"
+  - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
+  - "chmod +x /home/shippable/bin/chromedriver"
+  - "echo '#!/bin/bash' | sudo tee /usr/local/bin/google-chrome"
+  - "echo 'exec /usr/local/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
+  -  "sudo chmod +x /usr/local/bin/google-chrome"
 
 script:
-  - sudo npm install
+  - sudo ln -sf /tmp/firefox/firefox /usr/bin/firefox
   - export DISPLAY=:99.0
   - /etc/init.d/xvfb start
+
+  # Stop Selenium
+  - sudo su -c "killall -15 java";
+
