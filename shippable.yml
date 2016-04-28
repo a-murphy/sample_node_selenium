@@ -37,7 +37,6 @@ after_script:
   # - /etc/init.d/xvfb start
   - mvn clean cobertura:cobertura
   - xvfb-run --server-args="-ac" npm test
-
   # Stop Selenium
   - sudo su -c "killall -15 java";
 
