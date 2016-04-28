@@ -39,3 +39,4 @@ script:
   # Stop Selenium
   - sudo su -c "killall -15 java";
 
+build_image: shippable/minv2:latest
