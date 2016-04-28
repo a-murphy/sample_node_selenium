@@ -21,10 +21,7 @@ before_install:
   - popd
  
   # Selenium
-  - export SHIPPABLE_SELENIUM_BINARY="/usr/local/selenium/selenium-server-standalone-2.52.0.jar";
   - export SHIPPABLE_SELENIUM_PORT=4444
-  - export SHIPPABLE_SELENIUM_CMD="java -Djava.security.egd=file:///dev/urandom -jar $SHIPPABLE_SELENIUM_BINARY -log selenium.log -port $SHIPPABLE_SELENIUM_PORT > /dev/null 2>&1 &";
-  - export SHIPPABLE_SELENIUM_LOG="selenium.log"
   - export DISPLAY=":99.0"
   - start_generic_service "selenium" "$SHIPPABLE_SELENIUM_BINARY" "$SHIPPABLE_SELENIUM_CMD" "$SHIPPABLE_SELENIUM_PORT" "$SHIPPABLE_SELENIUM_LOG";
 
