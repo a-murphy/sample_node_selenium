@@ -12,11 +12,13 @@ env:
 
 before_install:
   # Firefox
+  - pushd /tmp
   - "sudo wget \"https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$firefox/linux-x86_64/en-US/firefox-$firefox.tar.bz2\""
   - sudo tar -xjvf firefox-$firefox.tar.bz2
   - sudo ln -sf /tmp/firefox/firefox /usr/bin/firefox
   - ff_version=`firefox --version`
   - echo "Using firefox version $ff_version"
+  - popd
  
   # Selenium
   - export SHIPPABLE_SELENIUM_BINARY="/usr/local/selenium/selenium-server-standalone-2.52.0.jar";
