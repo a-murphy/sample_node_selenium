@@ -32,6 +32,8 @@ before_install:
   - "echo 'exec /usr/local/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
   - "sudo chmod +x /usr/local/bin/google-chrome"
 
+script:
+  - echo "true"
 after_script:
   - export DISPLAY=:99.0
   # - /etc/init.d/xvfb start
