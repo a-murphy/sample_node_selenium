@@ -21,7 +21,7 @@
       "silent": true,
       "ie_driver": "",
       "cli_args" : {
-        "webdriver.chrome.driver" : "/usr/bin/google-chrome"
+        "webdriver.chrome.driver" : "/bin/chrome-driver"
       },
       "screenshots" : {
         "enabled" : false,
