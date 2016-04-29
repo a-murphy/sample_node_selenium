@@ -11,14 +11,13 @@ env:
   - firefox="44.0"
 
 before_install:
-# Firefox
+  #xvfb
+  - export DISPLAY=:99.0
+  - /etc/init.d/xvfb start
+  # Firefox
   - "sudo wget \"https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$firefox/linux-x86_64/en-US/firefox-$firefox.tar.bz2\""
   - sudo tar -xjvf firefox-$firefox.tar.bz2
-  - sudo ln -sf /tmp/firefox/firefox /usr/bin/firefox
-  - export PATH=$PATH:/usr/bin/firefox/firefox
-  - echo $PATH
-  # - ff_version='firefox --version 2>&1';
-  # - echo "Using firefox version $ff_version"
+  - sudo ln -sf /usr/lib/firefox/firefox /usr/bin/firefox
 
   # Selenium
   - export SHIPPABLE_SELENIUM_PORT=4444
