@@ -11,33 +11,36 @@ env:
   - firefox="44.0"
 
 before_install:
-  #xvfb
+#xvfb
   - export DISPLAY=:99.0
   - /etc/init.d/xvfb start
-  # Firefox
+ # Firefox
+  - pushd /tmp
   - "sudo wget \"https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$firefox/linux-x86_64/en-US/firefox-$firefox.tar.bz2\""
   - sudo tar -xjvf firefox-$firefox.tar.bz2
-  - sudo ln -sf /usr/lib/firefox/firefox /usr/bin/firefox
-
-  # Selenium
+  - sudo ln -sf /tmp/firefox/firefox /usr/bin/firefox
+  - ff_version=`firefox --version`
+  - echo "Using firefox version $ff_version"
+  - popd
+# Selenium
   - export SHIPPABLE_SELENIUM_PORT=4444
   - export DISPLAY=":99.0"
   - start_generic_service "selenium" "$SHIPPABLE_SELENIUM_BINARY" "$SHIPPABLE_SELENIUM_CMD" "$SHIPPABLE_SELENIUM_PORT" "$SHIPPABLE_SELENIUM_LOG";
 
-  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip"
+# Chrome
+  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
   - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
   - "chmod +x /home/shippable/bin/chromedriver"
-  - "echo '#!/bin/bash' | sudo tee /usr/local/bin/google-chrome"
-  - "echo 'exec /usr/local/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
+  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
+  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
   - "sudo chmod +x /usr/local/bin/google-chrome"
-
 script:
   - echo "true"
 after_script:
   - export DISPLAY=:99.0
   # - /etc/init.d/xvfb start
-  - mvn clean cobertura:cobertura
-  - xvfb-run --server-args="-ac" npm test
+  #- mvn clean cobertura:cobertura
+  - npm test
   # Stop Selenium
   - sudo su -c "killall -15 java";
 
