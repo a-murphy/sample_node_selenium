@@ -28,12 +28,30 @@ before_install:
   - start_generic_service "selenium" "$SHIPPABLE_SELENIUM_BINARY" "$SHIPPABLE_SELENIUM_CMD" "$SHIPPABLE_SELENIUM_PORT" "$SHIPPABLE_SELENIUM_LOG";
 
 # Chrome
-  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
-  - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
-  - "chmod 777 /home/shippable/bin/chromedriver"
-  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
-  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
-  - "sudo chmod 777 /usr/local/bin/google-chrome"
+#  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
+#  - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
+#  - "chmod 777 /home/shippable/bin/chromedriver"
+#  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
+#  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
+#  - "sudo chmod 777 /usr/local/bin/google-chrome"sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome-stable_current_amd64.deb
+  - sudo apt-get install -y -f
+  - sudo rm -f google-chrome-stable_current_amd64.deb
+
+  - echo "================= Installing Chrome driver ==================="
+  - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
+  - sudo unzip chromedriver_linux64.zip && sudo rm -f chromedriver_linux64.zip
+  - sudo mv chromedriver /usr/local/bin/chromedriver
+  - sudo chmod a+x /usr/local/bin/chromedriver
+  
+  - sudo apt-get install chromium-browser;
+  - sudo ln -s /usr/bin/chromium-browser /usr/bin/chrome;
+  - sudo apt-get -f install;
+
+  - wget -q -O- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  - sudo apt-get update
+  - sudo apt-get install google-chrome-stable
+
 script:
   - echo "true"
   - ls -al /usr/local/bin/
