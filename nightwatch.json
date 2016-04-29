@@ -23,15 +23,10 @@
       "cli_args" : {
         "webdriver.chrome.driver" : "/bin/chrome-driver"
       },
-      "screenshots" : {
-        "enabled" : false,
-        "path" : ""
-      },
       "desiredCapabilities": {
         "browserName": "chrome",
         "javascriptEnabled": true,
-        "acceptSslCerts": true,
-        "args" : ["--no-sandbox"]
+        "acceptSslCerts": true
       }
     }
   }
