@@ -10,7 +10,10 @@
     "server_path" : "",
     "log_path" : "",
     "host" : "127.0.0.1",
-    "port" : 4444
+    "port" : 4444,
+    "cli_args": {
+      "webdriver.chrome.driver": "bin/chromedriver"
+    }
   },
 
   "test_settings" : {
@@ -19,9 +22,11 @@
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
+      "chrome_driver": "",
       "ie_driver": "",
-      "cli_args" : {
-        "webdriver.chrome.driver" : "/home/shippable/bin/chromedriver"
+      "screenshots": {
+        "enabled": false,
+        "path": ""
       },
       "desiredCapabilities": {
         "browserName": "chrome",
