@@ -32,36 +32,15 @@ before_install:
 #  - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
 #  - "chmod 777 /home/shippable/bin/chromedriver"
 
-#  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
-#  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
-#  - "sudo chmod 777 /usr/local/bin/google-chrome"
+  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
+  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
+  - "sudo chmod 777 /usr/local/bin/google-chrome"
   #- sudo apt-get update && apt-get install -y libappindicator1 libnss3 --no-install-recommends
-  - sudo apt-get update && apt-get install -y \
-    ca-certificates \
-    gconf-service \
-    hicolor-icon-theme \
-    libappindicator1 \
-    libasound2 \
-    libcanberra-gtk-module \
-    libcurl3 \
-    libexif-dev \
-    libgconf-2-4 \
-    libgl1-mesa-dri \
-    libgl1-mesa-glx \
-    libnspr4 \
-    libnss3 \
-    libpango1.0-0 \
-    libv4l-0 \
-    libxss1 \
-    libxtst6 \
-    fonts-liberation\
-    xdg-utils \
-    --no-install-recommends
-  - sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome-stable_current_amd64.deb
-  - sudo apt-get install -y -f
+  #- sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  #- sudo dpkg -i google-chrome-stable_current_amd64.deb
+  #- sudo apt-get install -y -f
   #- sudo apt-get install google-chrome-stable
-  - sudo rm -f google-chrome-stable_current_amd64.deb
+  #- sudo rm -f google-chrome-stable_current_amd64.deb
 
   - echo "================= Installing Chrome driver ==================="
   - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
