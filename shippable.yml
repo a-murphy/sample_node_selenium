@@ -37,7 +37,7 @@ before_install:
   - "sudo chmod 777 /usr/local/bin/google-chrome"
 
   - echo "================= Installing Chrome driver ==================="
-  - sudo wget http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip
+  - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
   - sudo unzip chromedriver_linux64.zip && sudo rm -f chromedriver_linux64.zip
   - sudo mv chromedriver /usr/local/bin/chromedriver
   - sudo chmod a+x /usr/local/bin/chromedriver
