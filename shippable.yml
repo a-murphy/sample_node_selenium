@@ -34,10 +34,11 @@ before_install:
 #  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
 #  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
 #  - "sudo chmod 777 /usr/local/bin/google-chrome"sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome-stable_current_amd64.deb
-  - sudo apt-get install -y -f
-  - sudo rm -f google-chrome-stable_current_amd64.deb
+  #- sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  #- sudo dpkg -i google-chrome-stable_current_amd64.deb
+  #- sudo apt-get install -y -f
+  - sudo apt-get install google-chrome-stable
+  #- sudo rm -f google-chrome-stable_current_amd64.deb
 
   - echo "================= Installing Chrome driver ==================="
   - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
