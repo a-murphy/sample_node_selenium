@@ -21,7 +21,7 @@
       "silent": true,
       "ie_driver": "",
       "cli_args" : {
-        "webdriver.chrome.driver" : "/bin/chrome-driver"
+        "webdriver.chrome.driver" : "/home/shippable/bin/chromedriver"
       },
       "desiredCapabilities": {
         "browserName": "chrome",
