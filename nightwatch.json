@@ -19,7 +19,6 @@
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
-      "firefox_profile": false,
       "ie_driver": "",
       "cli_args" : {
         "webdriver.chrome.driver" : "/usr/bin/google-chrome"
