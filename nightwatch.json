@@ -22,7 +22,7 @@
       "firefox_profile": false,
       "ie_driver": "",
       "cli_args" : {
-        "webdriver.chrome.driver" : "/usr/bin/local/google-chrome"
+        "webdriver.chrome.driver" : "/usr/bin/google-chrome"
       },
       "screenshots" : {
         "enabled" : false,
