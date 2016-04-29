@@ -48,13 +48,9 @@ before_install:
   - sudo mv chromedriver /usr/local/bin/chromedriver
   - sudo chmod a+x /usr/local/bin/chromedriver
   
-  - sudo apt-get install chromium-browser;
-  - sudo ln -s /usr/bin/chromium-browser /usr/bin/chrome;
-  - sudo apt-get -f install;
-
-  - wget -q -O- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - sudo apt-get update
-  - sudo apt-get install google-chrome-stable
+  #- wget -q -O- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  #- sudo apt-get update
+  #- sudo apt-get install google-chrome-stable
 
 script:
   - echo "true"
