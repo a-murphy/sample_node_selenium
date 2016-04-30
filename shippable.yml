@@ -28,19 +28,19 @@ before_install:
   - start_generic_service "selenium" "$SHIPPABLE_SELENIUM_BINARY" "$SHIPPABLE_SELENIUM_CMD" "$SHIPPABLE_SELENIUM_PORT" "$SHIPPABLE_SELENIUM_LOG";
 
 # Chrome
-#  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
-#  - "unzip /tmp/chromedriver.zip -d /home/shippable/bin"
-#  - "chmod 777 /home/shippable/bin/chromedriver"
+  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
+  - "unzip /tmp/chromedriver.zip -d /usr/local/bin"
+  - "chmod a+x /usr/local/bin/chromedriver"
 
   - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
   - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
-  - "sudo chmod 777 /usr/local/bin/google-chrome"
+  - "sudo chmod a+x /usr/local/bin/google-chrome"
 
-  - echo "================= Installing Chrome driver ==================="
-  - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
-  - sudo unzip chromedriver_linux64.zip && sudo rm -f chromedriver_linux64.zip
-  - sudo mv chromedriver /home/shippable/bin/chromedriver
-  - sudo chmod a+x /home/shippable/bin/chromedriver
+#  - echo "================= Installing Chrome driver ==================="
+#  - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
+#  - sudo unzip chromedriver_linux64.zip && sudo rm -f chromedriver_linux64.zip
+#  - sudo mv chromedriver /home/shippable/bin/chromedriver
+#  - sudo chmod a+x /home/shippable/bin/chromedriver
   
 script:
   - echo "true"
