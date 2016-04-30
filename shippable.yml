@@ -39,8 +39,8 @@ before_install:
   - echo "================= Installing Chrome driver ==================="
   - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
   - sudo unzip chromedriver_linux64.zip && sudo rm -f chromedriver_linux64.zip
-  - sudo mv chromedriver /usr/local/bin/chromedriver
-  - sudo chmod a+x /usr/local/bin/chromedriver
+  - sudo mv chromedriver /home/shippable/bin/chromedriver
+  - sudo chmod a+x /home/shippable/bin/chromedriver
   
 script:
   - echo "true"
