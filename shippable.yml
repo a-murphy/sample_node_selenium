@@ -29,8 +29,8 @@ before_install:
 
 # Chrome
   - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
-  - "unzip /tmp/chromedriver.zip -d /usr/local/bin"
-  - "chmod a+x /usr/local/bin/chromedriver"
+  - "sudo unzip /tmp/chromedriver.zip -d /usr/local/bin"
+  - "sudo chmod a+x /usr/local/bin/chromedriver"
 
   - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
   - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
