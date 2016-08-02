@@ -1,58 +1,13 @@
-language: node_js
-
-node_js:
-  - "0.10"
-
-addons:
-  selenium: "2.53"
-
-env:
-  - firefox="45.0"
-  - firefox="44.0"
-
-before_install:
-#xvfb
-  - export DISPLAY=:99.0
-  - /etc/init.d/xvfb start
- # Firefox
-  - pushd /tmp
-  - "sudo wget \"https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$firefox/linux-x86_64/en-US/firefox-$firefox.tar.bz2\""
-  - sudo tar -xjvf firefox-$firefox.tar.bz2
-  - sudo ln -sf /tmp/firefox/firefox /usr/bin/firefox
-  - ff_version=`firefox --version`
-  - echo "Using firefox version $ff_version"
-  - popd
-# Selenium
-  - export SHIPPABLE_SELENIUM_PORT=4444
-  - export DISPLAY=":99.0"
-  - start_generic_service "selenium" "$SHIPPABLE_SELENIUM_BINARY" "$SHIPPABLE_SELENIUM_CMD" "$SHIPPABLE_SELENIUM_PORT" "$SHIPPABLE_SELENIUM_LOG";
-
-# Chrome
-  - "echo '#!/bin/bash' | sudo tee /usr/bin/google-chrome"
-  - "echo 'exec /usr/bin/chrome --no-sandbox --disable-gpu \"$@\"' | sudo tee -a /usr/local/bin/google-chrome"
-  - "sudo chmod a+x /usr/local/bin/google-chrome"
-
-  - "curl -o /tmp/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.18/chromedriver_linux64.zip"
-  - "sudo unzip /tmp/chromedriver.zip -d /usr/local/bin"
-  - "sudo chmod a+x /usr/local/bin/chromedriver"
-
-
-#  - echo "================= Installing Chrome driver ==================="
-#  - sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
-#  - sudo unzip chromedriver_linux64.zip && sudo rm -f chromedriver_linux64.zip
-#  - sudo mv chromedriver /home/shippable/bin/chromedriver
-#  - sudo chmod a+x /home/shippable/bin/chromedriver
-  
-script:
-  - echo "true"
-  - ls -al /usr/local/bin/
-  - ls -al /home/shippable/bin/
-after_script:
-  - export DISPLAY=:99.0
-  # - /etc/init.d/xvfb start
-  #- mvn clean cobertura:cobertura
-  - npm test
-  # Stop Selenium
-  - sudo su -c "killall -15 java";
 
 build_image: shippable/minv2:latest
+language: node_js
+node_js:
+  - "0.10"
+services:
+  - selenium
+addons:
+  firefox: "17.0"
+script:
+  - sudo npm install
+  - export DISPLAY=:99.0
+  - xvfb-run --server-args="-ac" npm test
