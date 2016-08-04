@@ -5,6 +5,8 @@ services:
   - selenium
 addons:
   firefox: "17.0"
+  
+build_image: drydock/u14phpall:prod
 script:
   - sudo npm install
  # - export DISPLAY=:99.0
