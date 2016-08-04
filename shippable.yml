@@ -9,6 +9,7 @@ addons:
 build_image: drydock/u14phpall:prod
 script:
   - sudo npm install
+  - chmod +x script.sh
   - ./script.sh
  # - export DISPLAY=:99.0
  # - xvfb-run -e /dev/stdout --server-args="-ac" npm test test
