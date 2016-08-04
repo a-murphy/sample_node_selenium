@@ -8,5 +8,5 @@ addons:
 script:
   - sudo npm install
  # - export DISPLAY=:99.0
-  - xvfb-run --server-args="-ac" npm test
+  - xvfb-run -e /dev/stdout --server-args="-ac" npm test test
 cache: true
